@@ -12,8 +12,14 @@ def seven_day_rolling_average(array):
   for i in range(7, len(array)):
     slice = array[i - 7:i]
     new_averages[i - 7] = np.sum(slice) / 7
-  print(new_averages)
   return new_averages
+
+def make_cumulative(array):
+  sum = np.zeros(len(array))
+  for i in range(len(array)):
+    sum[i] = array[i] + sum[i - 1]#sum[-1] is 0
+  return sum
+
 
 cases_filepath = "new_cases.json"
 
@@ -26,9 +32,8 @@ with open(cases_filepath) as jsonfile:
     cases.append(result["New Cases"])
     rates.append(result["Case Positivity %"])
 
-print(type(cases))
-
 cases = np.array(cases).astype(np.float)
+cumulative_cases = make_cumulative(cases)
 cases = seven_day_rolling_average(cases)
 
 rates = np.array(rates).astype(np.float)
@@ -40,4 +45,8 @@ plt.clf()
 
 plt.plot(rates)
 plt.savefig("rates.png")
+plt.clf()
+
+plt.plot(cumulative_cases)
+plt.savefig("cumulative_cases.png")
 
