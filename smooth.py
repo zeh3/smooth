@@ -39,14 +39,28 @@ cases = seven_day_rolling_average(cases)
 rates = np.array(rates).astype(np.float)
 rates = seven_day_rolling_average(rates)
 
+# graphing time
+
+xlabel = "Days Since UIUC Saliva Testing Centers Opened"
+
 plt.plot(cases)
+plt.title("A Rolling Average of New Coronavirus Cases at UIUC")
+plt.xlabel(xlabel)
+plt.ylabel("Average New Cases Per Day")
 plt.savefig("cases.png")
 plt.clf()
 
 plt.plot(rates)
+plt.title("A Rolling Average of Coronavirus Positivity Rates at UIUC")
+plt.xlabel(xlabel)
+plt.ylabel("Average Positivity Rate")
 plt.savefig("rates.png")
 plt.clf()
 
 plt.plot(cumulative_cases)
+plt.title("Cumulative Coronavirus Cases at UIUC")
+plt.xlabel(xlabel)
+plt.ylabel("Cumulative Cases Since July 6, 2020")
 plt.savefig("cumulative_cases.png")
+plt.clf()
 
