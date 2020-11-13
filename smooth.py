@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 # https://stackoverflow.com/questions/28393103/typeerror-cannot-perform-reduce-with-flexible-type
 
 def seven_day_rolling_average(array):
-  new_averages = np.zeros(len(array) - 7)
-  for i in range(7, len(array)):
+  new_averages = np.zeros(len(array) - 6)
+  for i in range(7, len(array) + 1):
     slice = array[i - 7:i]
     new_averages[i - 7] = np.sum(slice) / 7
   return new_averages
